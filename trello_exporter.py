@@ -59,6 +59,7 @@ def select_trello_board(api_key, access_token):
                 print(f"{index}. {board_name}")
 
             selection = input("Enter the number of the board you want to export: ")
+            print()
 
             try:
                 selection = int(selection)
@@ -158,12 +159,8 @@ def create_excel_sheet(data_to_export, board_name):
 
 
     create_info_cell(worksheet, row=29, column=12, text="""
-                    Prio 1: Högst prio, fokusera snarast.
-                    Prio 2: Väldigt intressant men gör 1:orna först. 
-                    Prio 3: Detta vill absolut lägga tid på men "inte nu". 
-                    Prio 4: Relevant men avvakta.
-                    Prio 5: Borde vi inte ta bort detta? 
-                    Ingen åsikt: Lämna blankt.
+                    ADD YOUR HARDCODED ADDITIONAL INFORMATION HERE.
+                    See trello_exporter.py line 161
                     """)
 
     
