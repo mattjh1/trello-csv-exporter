@@ -1,13 +1,19 @@
-import openpyxl
-from openpyxl.styles import PatternFill, Alignment, Border, Side
-from openpyxl.utils import get_column_letter
-import pandas as pd
-from loguru import logger
-from dotenv import load_dotenv
+### DEPRECATED ###
+### DEPRECATED ###
+### DEPRECATED ###
+### DEPRECATED ###
+
 import os
-import requests
 import sys
 import time
+
+import openpyxl
+import pandas as pd
+import requests
+from dotenv import load_dotenv
+from loguru import logger
+from openpyxl.styles import Alignment, Border, PatternFill, Side
+from openpyxl.utils import get_column_letter
 
 load_dotenv()
 

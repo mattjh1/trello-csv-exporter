@@ -25,7 +25,7 @@ Before you can run the script, you need to make sure the required Python depende
 1. Run the script.
 
    ```bash
-   python trello_exporter.py
+   python -m trello_exporter
    ```
 
 2. Follow the script's prompts to select the Trello board you want to export.
