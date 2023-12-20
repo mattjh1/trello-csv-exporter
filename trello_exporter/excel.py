@@ -26,12 +26,6 @@ def create_info_cell(worksheet, row, column, text):
 
 def create_excel_sheet(data_to_export, board_name):
     data_export_df = pd.DataFrame(data_to_export)
-    data_export_df.sort_values(by='List', inplace=True)
-    list_counts = data_export_df['List'].value_counts().reset_index()
-    list_counts.columns = ['List', 'Count']
-    sorted_df = data_export_df.merge(list_counts, on='List')
-    sorted_df.sort_values(by=['Count', 'List'], ascending=[False, True], inplace=True)
-
     workbook = openpyxl.load_workbook("./csv/trello_template.xlsx")
     worksheet = workbook.active
 
@@ -41,7 +35,7 @@ def create_excel_sheet(data_to_export, board_name):
     current_list_value = None
     n_row = 1
 
-    for _, card in sorted_df.iterrows():
+    for _, card in data_export_df.iterrows():
             list_value = card['List']
 
             if list_value != current_list_value:
