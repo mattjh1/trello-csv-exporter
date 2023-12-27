@@ -1,7 +1,10 @@
+# excel.py
+
 import openpyxl
 import pandas as pd
-from openpyxl.styles import PatternFill, Alignment, Border, Side
+from openpyxl.styles import Alignment, Border, PatternFill, Side
 from openpyxl.utils import get_column_letter
+
 
 def create_info_cell(worksheet, row, column, text):
     cell = worksheet.cell(row=row, column=column, value=text)
@@ -24,7 +27,7 @@ def create_info_cell(worksheet, row, column, text):
 
     return cell
 
-def create_excel_sheet(data_to_export, board_name):
+def create_excel_sheet(data_to_export, board_name, output_dir=None):
     data_export_df = pd.DataFrame(data_to_export)
     workbook = openpyxl.load_workbook("./csv/trello_template.xlsx")
     worksheet = workbook.active
@@ -70,5 +73,7 @@ def create_excel_sheet(data_to_export, board_name):
         cell.fill = grey_fill
 
     sanitized_board_name = "".join(c for c in board_name if c.isalnum() or c in (' ', '_'))
-    sanitized_filename = f'./csv/{sanitized_board_name}_trello_template.xlsx'
+    output_dir = output_dir or "./csv"
+        
+    sanitized_filename = os.path.join(output_dir, f'{sanitized_board_name}_trello_template.xlsx')
     workbook.save(sanitized_filename)

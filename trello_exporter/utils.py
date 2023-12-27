@@ -1,11 +1,22 @@
+# utils.py
+
 import os
 import time
-
+import boto3
+from botocore.exceptions import NoCredentialsError
 from dotenv import load_dotenv
 from loguru import logger
 
 from .api import get_trello_boards
 
+
+def check_aws_credentials(profile_name=None):
+    try:
+        session = boto3.Session(profile_name=profile_name)
+        session.client('s3').list_buckets()
+        return True
+    except NoCredentialsError:
+        return False
 
 def load_environment_variables():
     load_dotenv()
