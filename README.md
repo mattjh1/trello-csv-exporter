@@ -14,11 +14,16 @@ Before you can run the script, you need to make sure the required Python depende
 
    ![Local Image](./images/img.png)
 
-2. **Environment Variables**: Create a `.env` file in your project directory (if not already present) and add your Trello API Key and Token in the following format:
+2. **Environment Variables**: for convienence a file exists called `.env_example` that has the required structure:
    ```bash
    TRELLO_API_KEY=your_api_key
    TRELLO_TOKEN=your_access_token
    ```
+   To create a `.env` file in your project directory:
+   ```bash
+   cp .env_example .env
+   ```
+   And populate `.env` with your credentials
 
 ## Virtual Environment (venv)
 
