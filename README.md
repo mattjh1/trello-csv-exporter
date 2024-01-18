@@ -29,16 +29,25 @@ Before you can run the script, you need to make sure the required Python depende
 
 It's recommended to create a virtual environment for your project. Follow these steps:
 
+Create a virtual environment
+
 ```bash
-# Create a virtual environment
 python -m venv venv
+```
 
-# Activate the virtual environment
+Activate the virtual environment
+
+```bash
 source venv/bin/activate  # On Linux or macOS
-# or
-.\venv\Scripts\activate   # On Windows
+```
 
-# Install dependencies
+```bash
+.\venv\Scripts\activate   # On Windows
+```
+
+Install dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 

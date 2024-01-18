@@ -170,15 +170,15 @@ def create_excel_sheet(data_to_export, board_name):
             cell.fill = grey_fill
 
         worksheet.cell(row=n_row, column=2, value=card["List"])
-        worksheet.cell(
-            row=n_row, column=3, value=card["Name"]
-        ).alignment = text_alignment
-        worksheet.cell(
-            row=n_row, column=4, value=card["Description"]
-        ).alignment = text_alignment
-        worksheet.cell(
-            row=n_row, column=5, value=card["Labels"]
-        ).alignment = text_alignment
+        worksheet.cell(row=n_row, column=3, value=card["Name"]).alignment = (
+            text_alignment
+        )
+        worksheet.cell(row=n_row, column=4, value=card["Description"]).alignment = (
+            text_alignment
+        )
+        worksheet.cell(row=n_row, column=5, value=card["Labels"]).alignment = (
+            text_alignment
+        )
 
     create_info_cell(
         worksheet,
