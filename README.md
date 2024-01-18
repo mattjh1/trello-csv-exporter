@@ -20,6 +20,23 @@ Before you can run the script, you need to make sure the required Python depende
    TRELLO_TOKEN=your_access_token
    ```
 
+## Virtual Environment (venv)
+
+It's recommended to create a virtual environment for your project. Follow these steps:
+
+```bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+source venv/bin/activate  # On Linux or macOS
+# or
+.\venv\Scripts\activate   # On Windows
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
 ## Usage
 
 1. Run the script.
