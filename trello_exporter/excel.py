@@ -1,5 +1,3 @@
-# excel.py
-
 import os
 
 import openpyxl
