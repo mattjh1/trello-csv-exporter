@@ -71,7 +71,7 @@ def create_excel_sheet(data_to_export, board_name, output_dir=None):
         column=12,
         text="""
                     ADD YOUR HARDCODED ADDITIONAL INFORMATION HERE.
-                    See trello_exporter.py line 161
+                    See excel.py line 74
                     """,
     )
 
