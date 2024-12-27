@@ -1,4 +1,6 @@
 import argparse
+import os
+import platform
 import sys
 
 import boto3
@@ -28,21 +30,46 @@ def setup():
     args = parser.parse_args()
 
     is_s3 = args.output_dir and args.output_dir.startswith("s3://")
-    aws_profile = args.aws_profile
+    aws_profile = args.aws_profile or None
 
-    if is_s3 and not aws_profile:
-        aws_profile = boto3.DEFAULT_SESSION.profile_name
+    if is_s3:
+        try:
+            if aws_profile:
+                session = boto3.Session(profile_name=aws_profile)
+            else:
+                session = boto3.Session()
 
-    if is_s3 and not check_aws_credentials(aws_profile):
-        logger.error(
-            "AWS credentials not found or not authorized. Please check your credential"
-        )
-        sys.exit(1)
+            credentials = session.get_credentials()
+            if (
+                not credentials
+                or not credentials.access_key
+                or not credentials.secret_key
+            ):
+                raise ValueError("AWS credentials are incomplete or not loaded.")
+
+            region = session.region_name
+            if not region:
+                raise ValueError(
+                    "AWS region not set. Ensure AWS_REGION or AWS_DEFAULT_REGION is configured."
+                )
+
+        except Exception as e:
+            logger.error(f"Error initializing AWS session: {str(e)}")
+            sys.exit(1)
 
     credentials = load_environment_variables()
     api_key = credentials["api_key"]
     access_token = credentials["access_token"]
-    output_dir = args.output_dir or "./csv"
+
+    if args.output_dir:
+        output_dir = args.output_dir
+    else:
+        if platform.system() == "Windows":
+            # For Windows, use the user's Downloads folder in their profile
+            output_dir = os.path.join(os.environ["USERPROFILE"], "Downloads")
+        else:
+            # For macOS/Linux, use ~/Downloads
+            output_dir = os.path.expanduser("~/Downloads")
 
 
 def main():

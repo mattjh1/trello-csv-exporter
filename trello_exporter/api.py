@@ -52,20 +52,27 @@ def get_trello_board_data(api_key, access_token, board_id):
 def upload_to_s3(data_to_export, board_name, s3_url, aws_profile=None):
     s3_url_parts = urlparse(s3_url)
     bucket_name = s3_url_parts.netloc
+
     sanitized_board_name = "".join(
         c for c in board_name if c.isalnum() or c in (" ", "_")
     )
-    sanitized_filename = f"{sanitized_board_name}_trello_template.xlsx"
+    file_path = create_excel_sheet(data_to_export, board_name, s3_url)
+
+    if not file_path:
+        logger.error("Error creating the Excel file.")
+        return False
 
     try:
-        with open(sanitized_filename, "wb") as data_file:
-            create_excel_sheet(data_to_export, board_name, data_file)
-
+        file_key = os.path.join(
+            s3_url_parts.path.lstrip("/"),
+            f"{sanitized_board_name}_trello_template.xlsx",
+        )
         session = boto3.Session(profile_name=aws_profile)
         s3 = session.client("s3")
-        s3.upload_file(sanitized_filename, bucket_name, s3_url_parts.path.lstrip("/"))
-        logger.error("Upload successful")
+        s3.upload_file(file_path, bucket_name, file_key)
+        logger.info(f"File uploaded successfully to S3: {s3_url}")
         return True
+
     except NoCredentialsError:
         logger.error(
             "AWS credentials not available or not authorized. Please check your credentials."
@@ -75,4 +82,6 @@ def upload_to_s3(data_to_export, board_name, s3_url, aws_profile=None):
         logger.error(f"Error uploading to S3: {str(e)}")
         return False
     finally:
-        os.remove(sanitized_filename)
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            logger.info(f"Temporary file {file_path} deleted")
