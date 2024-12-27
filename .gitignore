@@ -1,3 +1,7 @@
+venv
+build
+dist
+trello_exporter.egg-info
 .env
 .DS_Store
 .vscode/
