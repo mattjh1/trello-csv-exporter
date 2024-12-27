@@ -1,10 +1,10 @@
+import importlib.resources
 import os
 import sys
 import tempfile
 
 import openpyxl
 import pandas as pd
-import pkg_resources
 from loguru import logger
 from openpyxl.styles import Alignment, Border, PatternFill, Side
 from openpyxl.utils import get_column_letter
@@ -35,13 +35,10 @@ def create_info_cell(worksheet, row, column, text):
 def create_excel_sheet(data_to_export, board_name, output_dir):
     data_export_df = pd.DataFrame(data_to_export)
     try:
-        # Load the template from the installed package (works both locally and after install)
-        template_path = pkg_resources.resource_filename(
-            __name__, "csv/trello_template.xlsx"
-        )
-
-        # Open the template file
-        workbook = openpyxl.load_workbook(template_path)
+        with importlib.resources.open_binary(
+            __package__, "csv/trello_template.xlsx"
+        ) as template_file:
+            workbook = openpyxl.load_workbook(template_file)
 
     except FileNotFoundError:
         logger.error("Template file not found")
