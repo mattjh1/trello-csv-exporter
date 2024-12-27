@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="trello-csv",
-    version="1.0.0",
+    version="1.0.1",
     description="CLI tool to export Trello board data to a CSV file.",
     long_description=long_description,
     long_description_content_type="text/markdown",
