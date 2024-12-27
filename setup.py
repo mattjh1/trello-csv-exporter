@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="trello-csv",
-    version="1.0.2",
+    version="1.0.3",
     description="CLI tool to export Trello board data to a CSV file.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -27,6 +27,7 @@ setup(
         "loguru>=0.7,<1.0",
         "colorama>=0.4.0",
         "boto3",
+        "setuptools",
     ],
     entry_points={
         "console_scripts": [
