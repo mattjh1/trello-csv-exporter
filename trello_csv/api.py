@@ -6,7 +6,7 @@ from botocore.exceptions import NoCredentialsError
 from botocore.utils import urlparse
 from loguru import logger
 
-from trello_exporter.excel import create_excel_sheet
+from trello_csv.excel import create_excel_sheet
 
 
 def get_trello_boards(api_key, access_token):

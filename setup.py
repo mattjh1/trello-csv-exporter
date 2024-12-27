@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="trello_exporter",
+    name="trello-csv",
     version="1.0.0",
     description="CLI tool to export Trello board data to a CSV file.",
     author="Mattias Holmgren",
@@ -9,7 +9,7 @@ setup(
     url="https://github.com/mattjh1/trello-csv-exporter",
     packages=find_packages(),
     package_data={
-        "trello_exporter": [
+        "trello_csv": [
             "csv/*",
             "trello_template.xlsx",
         ],
@@ -25,7 +25,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "trello-exporter=trello_exporter.__main__:main",
+            "trello-csv=trello_csv.__main__:main",
         ],
     },
     classifiers=[

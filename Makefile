@@ -8,8 +8,8 @@ install:
 
 # Uninstall the package
 uninstall:
-	python3 -m pip uninstall -y trello_exporter
+	python3 -m pip uninstall -y trello_csv
 
 # Clean build artifacts
 clean:
-	rm -rf build dist trello_exporter.egg-info
+	rm -rf build dist trello_csv.egg-info

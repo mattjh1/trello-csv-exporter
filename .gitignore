@@ -1,7 +1,7 @@
 venv
 build
 dist
-trello_exporter.egg-info
+trello_csv.egg-info
 .env
 .DS_Store
 .vscode/

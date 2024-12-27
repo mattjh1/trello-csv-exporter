@@ -6,10 +6,9 @@ import sys
 import boto3
 from loguru import logger
 
-from trello_exporter.api import get_trello_board_data, upload_to_s3
-from trello_exporter.excel import create_excel_sheet
-from trello_exporter.utils import (
-    check_aws_credentials,
+from trello_csv.api import get_trello_board_data, upload_to_s3
+from trello_csv.excel import create_excel_sheet
+from trello_csv.utils import (
     extract_card_data,
     load_environment_variables,
     select_trello_board,
