@@ -1,9 +1,14 @@
 from setuptools import find_packages, setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name="trello-csv",
     version="1.0.0",
     description="CLI tool to export Trello board data to a CSV file.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Mattias Holmgren",
     author_email="me@mattjh.sh",
     url="https://github.com/mattjh1/trello-csv-exporter",
