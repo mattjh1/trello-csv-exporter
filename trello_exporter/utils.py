@@ -4,10 +4,13 @@ import time
 
 import boto3
 from botocore.exceptions import NoCredentialsError
+from colorama import Fore, Style, init
 from dotenv import load_dotenv
 from loguru import logger
 
 from .api import get_trello_boards
+
+init(autoreset=True)
 
 
 def check_aws_credentials(profile_name=None):
@@ -42,11 +45,13 @@ def select_trello_board(api_key, access_token):
         boards = get_trello_boards(api_key, access_token)
 
         if boards:
-            logger.info("Available Trello boards:", format="{message}")
-            for index, (board_name, board_id) in enumerate(boards.items(), start=1):
-                logger.info(f"{index}. {board_name}", format="{message}")
+            print(f"{Fore.GREEN}Available Trello boards:{Style.RESET_ALL}")
+            for index, (board_name, _) in enumerate(boards.items(), start=1):
+                print(f"{Fore.CYAN}{index}. {board_name}{Style.RESET_ALL}")
 
-            selection = input("Enter the number of the board you want to export: ")
+            selection = input(
+                f"{Fore.YELLOW}Enter the number of the board you want to export: {Style.RESET_ALL}"
+            )
             print()
 
             try:
@@ -55,20 +60,18 @@ def select_trello_board(api_key, access_token):
                     selected_board = list(boards.values())[selection - 1]
                     return selected_board
                 else:
-                    logger.error(
-                        "Invalid selection. Please enter a valid number.",
-                        format="{message)",
+                    print(
+                        f"{Fore.RED}Invalid selection. Please enter a valid number.{Style.RESET_ALL}"
                     )
                     time.sleep(2)
             except ValueError:
-                logger.error(
-                    "Invalid input. Please enter a number.", format="{message)"
+                print(
+                    f"{Fore.RED}Invalid input. Please enter a number.{Style.RESET_ALL}"
                 )
                 time.sleep(2)
         else:
-            logger.error(
-                "No Trello boards found. Please check your credentials",
-                format="{message)",
+            print(
+                f"{Fore.RED}No Trello boards found. Please check your credentials.{Style.RESET_ALL}"
             )
             sys.exit(1)
 
