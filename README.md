@@ -96,7 +96,7 @@ If you want to contribute or build the project locally, here are the steps:
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/trello-csv-exporter.git
+git clone https://github.com/mattjh1/trello-csv-exporter.git
 cd trello-csv-exporter
 ```
 
