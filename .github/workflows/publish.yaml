@@ -8,6 +8,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment: publish
 
     steps:
       # Checkout the code
@@ -47,4 +48,4 @@ jobs:
       # Upload to PyPI
       - name: Publish to PyPI
         run: |
-          python -m twine upload --repository pypi dist/*
+          python -m twine upload --sign --identity 3D2E02E67B693A84F438D28584EDD2EE0A9C1182 dist/*
